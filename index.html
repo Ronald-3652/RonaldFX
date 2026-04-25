@@ -1,0 +1,205 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RonaldFX Forex Academy</title><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Orbitron:wght@500&display=swap" rel="stylesheet"><style>
+body{
+  margin:0;
+  font-family:'Poppins',sans-serif;
+  background:linear-gradient(135deg,#020617,#1e293b);
+  color:#e2e8f0;
+}
+
+header{
+  display:flex;
+  justify-content:space-between;
+  padding:20px 25px;
+  background:#020617;
+  border-bottom:1px solid #334155;
+  flex-wrap:wrap;
+}
+
+header h2{
+  font-family:'Orbitron',sans-serif;
+  color:#22c55e;
+  font-size:30px;
+}
+
+nav{
+  width:100%;
+  margin-top:10px;
+  text-align:center;
+}
+
+nav a{
+  color:#cbd5f5;
+  margin:0 10px;
+  text-decoration:none;
+  font-size:20px;
+}
+
+.hero{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+  padding:30px 20px;
+}
+
+.hero h1{
+  font-size:28px;
+  color:#22c55e;
+}
+
+.hero p{
+  font-size:14px;
+  color:#94a3b8;
+}
+
+.hero img{
+  width:180px;
+  margin-top:20px;
+  border-radius:20px;
+  box-shadow:0 0 15px #22c55e55;
+}
+
+.btn{
+  background:linear-gradient(45deg,#22c55e,#4ade80);
+  padding:10px 20px;
+  border:none;
+  color:black;
+  font-weight:600;
+  border-radius:8px;
+  cursor:pointer;
+  margin-top:10px;
+  width:100%;
+}
+
+section{
+  padding:35px 25px;
+}
+
+h2{
+  color:#38bdf8;
+  font-size:28px;
+}
+
+.card{
+  background:#020617;
+  border:1px solid #334155;
+  padding:15px;
+  border-radius:12px;
+  margin:10px 0;
+}
+
+input{
+  width:100%;
+  padding:15px;
+  margin:8px 0;
+  border-radius:8px;
+  border:none;
+  background:#1e293b;
+  color:white;
+}
+
+#customers .card{
+  border-left:5px solid #22c55e;
+}
+
+footer{
+  text-align:center;
+  padding:20px;
+  background:#020617;
+  color:#64748b;
+  font-size:18px;
+}
+
+/* Desktop view */
+@media(min-width:1600px,max-length:2200px){
+  .hero{
+    flex-direction:row;
+    justify-content:space-between;
+    text-align:left;
+  }
+
+  .hero img{
+    width:260px;
+    margin-top:0;
+  }
+
+  nav{
+    width:auto;
+    margin-top:0;
+  }
+
+  .btn{
+    width:auto;
+    font-size: 30px;
+  }
+}
+
+</style></head><body><header>
+<h2>Limsoft Forex</h2>
+<nav>
+<a href="#">Home</a>
+<a href="#signals">Signals</a>
+<a href="#payment">Buy</a>
+</nav>
+</header><div class="hero">
+<div>
+<h1>Elite Forex Signals</h1>
+<p>Trade Smart. Earn Consistently.</p>
+<button class="btn" onclick="alert('Join Telegram')">Join Now</button>
+</div>
+<img src="IMG_20260120_153613.jpg">
+</div><section id="signals">
+<h2>Premium Signals</h2>
+<div class="card">🔒 Locked Signal - Purchase to Access</div>
+</section><section id="payment">
+<h2>Buy Signals</h2>
+<div class="card">
+<input type="text" id="name" placeholder="Full Name">
+<input type="text" id="phone" placeholder="Phone Number"><button class="btn" onclick="payMpesa()">M-Pesa Payment</button> <button class="btn" onclick="payCard()">Card Payment</button>
+
+</div>
+</section><section>
+<h2>Customers</h2>
+<div id="customers"></div>
+</section><footer>
+© 2026 RonaldFX Forex Academy
+</footer><script>
+function saveCustomer(name, phone, method){
+ let customers = JSON.parse(localStorage.getItem("customers")) || [];
+ customers.push({name, phone, method});
+ localStorage.setItem("customers", JSON.stringify(customers));
+ showCustomers();
+}
+
+function showCustomers(){
+ let customers = JSON.parse(localStorage.getItem("customers")) || [];
+ let output = "";
+ customers.forEach(c => {
+   output += `<div class='card'>${c.name} | ${c.phone} | ${c.method}</div>`;
+ });
+ document.getElementById("customers").innerHTML = output;
+}
+
+function payMpesa(){
+ let name=document.getElementById("name").value;
+ let phone=document.getElementById("phone").value;
+ if(!name||!phone) return alert("Fill details");
+ alert("STK Push Sent to "+phone);
+ saveCustomer(name,phone,"M-Pesa");
+}
+
+function payCard(){
+ let name=document.getElementById("name").value;
+ let phone=document.getElementById("phone").value;
+ if(!name||!phone) return alert("Fill details");
+ alert("Processing Card Payment");
+ saveCustomer(name,phone,"Card");
+}
+
+showCustomers();
+</script></body>
+</html>
